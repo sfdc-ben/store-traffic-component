@@ -19,12 +19,14 @@
             component.set("v.currentTraffic", 0);
             component.set("v.maxTraffic", 5);
             component.set("v.capacity", 0);
+        } else {
+            helper.getStoreRecord(component);
         }
 
         if (selection.length && errors.length) {
             component.set('v.errors', []);
         }
-        helper.getStoreRecord(component);
+        
     },
 
     clearSelection: function(component, event, helper) {
