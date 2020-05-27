@@ -17,7 +17,7 @@
         if (selection.length == 0) {
             console.log("Clear");
             component.set("v.currentTraffic", 0);
-            component.set("v.maxTraffic", 5);
+            component.set("v.maxTraffic", 0);
             component.set("v.capacity", 0);
         } else {
             helper.getStoreRecord(component);

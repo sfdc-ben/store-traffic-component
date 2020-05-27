@@ -4,7 +4,7 @@
     <aura:attribute name="cardIconCustom" type="String" default="/resource/bbyBlueLogo" />
     <aura:attribute name="cardIconVariant" type="String" default="Square" />
 
-    <aura:attribute name="maxTraffic" type="Integer" default="5" />
+    <aura:attribute name="maxTraffic" type="Integer" default="0" />
     <aura:attribute name="currentTraffic" type="Integer" default="0" />
     <aura:attribute name="capacity" type="Integer" default="0" />
     
