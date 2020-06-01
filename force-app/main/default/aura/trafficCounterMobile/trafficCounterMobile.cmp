@@ -46,53 +46,37 @@
             </lightning:layout>
             <lightning:progressBar variant="circular" value="{!v.capacity}" size="small"></lightning:progressBar>
         </div>
-
-        <div>
-            <aura:if isTrue="{!v.capacity == 100}">
+        <aura:if isTrue="{!v.selection.length == 1}">
+            <div>
+                <aura:if isTrue="{!v.capacity == 100}">
+                    <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
+                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
+                    </div>
+                    <aura:set attribute="else">
+                        <div onclick="{!c.increment}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_success slds-box slds-align_absolute-center">
+                            <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
+                        </div>
+                    </aura:set>
+                </aura:if>
+                <aura:if isTrue="{!v.capacity == 0}">
+                    <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
+                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
+                    </div>
+                    <aura:set attribute="else">
+                        <div onclick="{!c.decrement}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_warning slds-box slds-align_absolute-center">
+                            <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </div>
+            <aura:set attribute="else">
                 <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
                     <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
                 </div>
-                <aura:set attribute="else">
-                    <div onclick="{!c.increment}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_success slds-box slds-align_absolute-center">
-                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
-                    </div>
-                </aura:set>
-            </aura:if>
-            <aura:if isTrue="{!v.capacity == 0}">
                 <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
                     <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
                 </div>
-                <aura:set attribute="else">
-                    <div onclick="{!c.decrement}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_warning slds-box slds-align_absolute-center">
-                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
-                    </div>
-                </aura:set>
-            </aura:if>
-        </div>
-
-        <!--<div>
-            <lightning:layout class="slds-m-vertical_small">
-                <lightning:layoutItem size="6">
-                    <div class="slds-align_absolute-center">
-                        <aura:if isTrue="{!v.capacity == 100}">
-                        <lightning:buttonIcon class="slds-icon_large" alternativeText="" iconClass="slds-icon_large " variant="bare" type="button" iconName="utility:jump_to_top" size="large" disabled="true" onclick="{!c.increment}"></lightning:buttonIcon>
-                        <aura:set attribute="else">
-                            <lightning:buttonIcon class="slds-icon_large" alternativeText="" iconClass="slds-icon_large slds-icon-text-success" variant="bare" type="button" iconName="utility:jump_to_top" size="large" onclick="{!c.increment}"></lightning:buttonIcon>
-                        </aura:set>
-                        </aura:if>
-                    </div>
-                </lightning:layoutItem>
-                <lightning:layoutItem size="6">
-                    <div class="slds-align_absolute-center">
-                        <aura:if isTrue="{!v.capacity == 0}">
-                            <lightning:buttonIcon class="slds-icon_large" alternativeText="" iconClass="slds-icon_large" variant="bare" type="button" iconName="utility:jump_to_bottom" disabled="true" size="large" onclick="{!c.decrement}"></lightning:buttonIcon>
-                            <aura:set attribute="else">
-                                <lightning:buttonIcon class="slds-icon_large" alternativeText="" iconClass="slds-icon_large slds-icon-text-error" variant="bare" type="button" iconName="utility:jump_to_bottom" size="large" onclick="{!c.decrement}"></lightning:buttonIcon>
-                            </aura:set>
-                        </aura:if>
-                    </div>
-                </lightning:layoutItem>
-            </lightning:layout>
-        </div>-->
+            </aura:set> 
+        </aura:if>
     </div>
 </aura:component>
