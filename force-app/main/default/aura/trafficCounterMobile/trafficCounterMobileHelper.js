@@ -11,8 +11,8 @@
                 var store = response.getReturnValue();
                 console.log(store);
                 component.set("v.currentTraffic", store.Current_Traffic__c);
-                component.set("v.maxTraffic", store.Max_Traffic__c);
-                var cap = Math.floor( (store.Current_Traffic__c / store.Max_Traffic__c)  * 100);
+                component.set("v.maxTraffic", store.Maximum_Traffic__c);
+                var cap = Math.floor( (store.Current_Traffic__c / store.Maximum_Traffic__c)  * 100);
                 component.set("v.capacity", cap);
             })
             $A.enqueueAction(action);

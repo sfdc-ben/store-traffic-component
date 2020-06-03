@@ -12,7 +12,7 @@
 
         // Execute search query
         List<List<SObject>> searchResults = [FIND :searchTerm IN ALL FIELDS RETURNING
-            Store__c (Id, Name, Max_Traffic__c, Store_Number__c WHERE id NOT IN :selectedIds)
+            Store__c (Id, Name, Maximum_Traffic__c, Store_Number__c WHERE id NOT IN :selectedIds)
             LIMIT :MAX_RESULTS];
 
         // Prepare results
@@ -30,7 +30,7 @@
     @AuraEnabled(cacheable=true)
     public static Store__c storeDetail(String storeId) {
         
-        Store__c thisStore = [SELECT Id, Current_Traffic__c, Max_Traffic__c FROM Store__c WHERE Id = :storeId];
+        Store__c thisStore = [SELECT Id, Current_Traffic__c, Maximum_Traffic__c FROM Store__c WHERE Id = :storeId];
         System.debug(thisStore);
         return thisStore;
     }
@@ -39,7 +39,7 @@
     public static Store__c changeTraffic(String storeId, String changeDir) {
         System.debug(storeId);
 
-        Store__c thisStore = [SELECT Id, Current_Traffic__c, Max_Traffic__c FROM Store__c WHERE Id = :storeId];
+        Store__c thisStore = [SELECT Id, Current_Traffic__c, Maximum_Traffic__c FROM Store__c WHERE Id = :storeId];
         System.debug(thisStore);
         
         if (changeDir == 'Increment') {

@@ -1,7 +1,7 @@
-<aura:component implements="force:appHostable" access="global" controller="StoreTrafficController">
+<aura:component implements="force:appHostable, forceCommunity:availableForAllPageTypes" access="global" controller="StoreTrafficController">
     <aura:attribute name="cardTitle" type="String" default="Store Traffic Counter" />
     <aura:attribute name="cardIcon" type="String" default="" />
-    <aura:attribute name="cardIconCustom" type="String" default="/resource/bbyBlueLogo" />
+    <aura:attribute name="cardIconCustom" type="String" default="/resource/bbyLogoFiles/bbyBlueLogo.jpeg" />
     <aura:attribute name="cardIconVariant" type="String" default="Square" />
 
     <aura:attribute name="maxTraffic" type="Integer" default="0" />
