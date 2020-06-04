@@ -1,0 +1,3 @@
+<design:component label="Store Traffic Counter - Community">
+    <design:attribute name="communityURL" label="Community URL Suffix" />
+</design:component>

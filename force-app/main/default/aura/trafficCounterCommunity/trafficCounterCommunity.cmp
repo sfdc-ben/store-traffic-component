@@ -1,0 +1,91 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="StoreTrafficController">
+    <aura:attribute name="cardTitle" type="String" default="Store Traffic Counter" />
+    <aura:attribute name="cardIcon" type="String" default="" />
+    <aura:attribute name="cardIconCustom" type="String" default="/resource/bbyLogoFiles/bbyBlueLogo.jpeg" />
+    <aura:attribute name="communityURL" type="String" />
+    <aura:attribute name="cardIconVariant" type="String" default="Square" />
+
+    <!-- <lightning:empApi aura:id="empApi" />
+    <aura:attribute name="channel" type="String" default="/event/Traffic_Change_Event__e"/>
+    <aura:attribute name="subscription" type="Map" /> -->
+
+    <aura:attribute name="maxTraffic" type="Integer" default="0" />
+    <aura:attribute name="currentTraffic" type="Integer" default="0" />
+    <aura:attribute name="capacity" type="Integer" default="0" />
+    <aura:attribute name="entrances" type="Integer" default="0" />
+    
+    <aura:attribute access="private" type="List" name="selection" default="[]"/>
+    <aura:attribute access="private" type="List" name="errors" default="[]"/>
+    <aura:attribute access="private" type="Boolean" name="isMultiEntry" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!--Card-->
+    <div style="height: 100%;" class="slds-card slds-card_boundary slds-m-around_x-small slds-p-around_medium">
+        <!--Card Header (Icon, Title, Action)-->
+        <div class="slds-media slds-media_center slds-m-bottom_medium">
+            <div class="slds-media__figure">
+                <lightning:avatar alternativeText="{!v.cardTitle}" fallbackIconName="{!v.cardIcon}" size="small" src="{!'/'+v.communityURL+v.cardIconCustom}" variant="{!v.cardIconVariant}"></lightning:avatar>
+            </div>
+            <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a class="slds-card__header-link slds-truncate" href="javascript:void(0);">
+                            <span><b>{!v.cardTitle}</b> </span>
+                        </a>
+                    </h2>
+            </div>
+            <div class="slds-media__figure slds-media_figure_reverse">
+                <!--Action Buttons-->
+            </div>
+        </div>
+        <!--Card Body-->
+        <div>
+            <c:lookupComponent selection="{!v.selection}" onSearch="{!c.lookupSearch}" onSelection="{!c.clearErrorsOnChange}" errors="{!v.errors}" label="Search" placeholder="Search Salesforce" isMultiEntry="{!v.isMultiEntry}"/>
+        </div>
+        <div>
+            <lightning:layout class="slds-m-vertical_small">
+                <lightning:layoutItem size="6">
+                    <div class="slds-m-bottom_xx-small slds-text-align_center slds-text-heading_large">{!v.currentTraffic}</div>
+                    <div class="slds-text-align_center slds-text-title_caps slds-text-color_weak">Current Traffic</div>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6">
+                    <div class="slds-m-bottom_xx-small slds-text-align_center slds-text-heading_large">{!v.maxTraffic}</div>
+                    <div class="slds-text-align_center slds-text-title_caps slds-text-color_weak">Max Traffic</div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:progressBar variant="circular" value="{!v.capacity}" size="small"></lightning:progressBar>
+        </div>
+        <aura:if isTrue="{!v.selection.length == 1}">
+            <div>
+                <aura:if isTrue="{!v.capacity == 100}">
+                    <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
+                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
+                    </div>
+                    <aura:set attribute="else">
+                        <div onclick="{!c.increment}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_success slds-box slds-align_absolute-center">
+                            <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
+                        </div>
+                    </aura:set>
+                </aura:if>
+                <aura:if isTrue="{!v.capacity == 0}">
+                    <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
+                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
+                    </div>
+                    <aura:set attribute="else">
+                        <div onclick="{!c.decrement}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_warning slds-box slds-align_absolute-center">
+                            <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </div>
+            <aura:set attribute="else">
+                <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
+                    <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" ></lightning:icon>
+                </div>
+                <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
+                    <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" ></lightning:icon>
+                </div>
+            </aura:set> 
+        </aura:if>
+    </div>
+</aura:component>

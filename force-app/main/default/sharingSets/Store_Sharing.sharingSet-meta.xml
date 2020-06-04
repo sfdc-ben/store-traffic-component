@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessMappings>
+        <accessLevel>Edit</accessLevel>
+        <object>Store__c</object>
+        <objectField>Store_Account__c</objectField>
+        <userField>Contact.Account</userField>
+    </accessMappings>
+    <name>Store Sharing</name>
+    <profiles>Store Traffic Counter User</profiles>
+</SharingSet>

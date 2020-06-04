@@ -27,10 +27,23 @@
         return results;
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
+    public static LookupSearchResult initSelection(String UserId){
+
+        String storeIcon = 'custom:custom50';
+        
+        Id accId = [SELECT contactId, contact.AccountId FROM User WHERE Id = :UserId].contact.AccountId;
+        Store__c store = [SELECT Id, Name, Maximum_Traffic__c, Store_Number__c FROM Store__c WHERE Store_Account__c = :accId];
+
+        LookupSearchResult result = new LookupSearchResult(store.Id, 'Store', storeIcon, store.Name, 'Store • '+ store.Store_Number__c);
+
+        return result;
+    }
+
+    @AuraEnabled
     public static Store__c storeDetail(String storeId) {
         
-        Store__c thisStore = [SELECT Id, Current_Traffic__c, Maximum_Traffic__c FROM Store__c WHERE Id = :storeId];
+        Store__c thisStore = [SELECT Id, Entrances__c, Current_Traffic__c, Maximum_Traffic__c FROM Store__c WHERE Id = :storeId];
         System.debug(thisStore);
         return thisStore;
     }
@@ -39,19 +52,55 @@
     public static Store__c changeTraffic(String storeId, String changeDir) {
         System.debug(storeId);
 
-        Store__c thisStore = [SELECT Id, Current_Traffic__c, Maximum_Traffic__c FROM Store__c WHERE Id = :storeId];
+        Store__c thisStore = [SELECT Id, Entrances__c, Current_Traffic__c, Maximum_Traffic__c FROM Store__c WHERE Id = :storeId];
         System.debug(thisStore);
+
+        Store_Date__c storeDateToday = null;
+        System.debug(storeDateToday);
+        Date today = date.today();
+
+        try{
+            storeDateToday = [SELECT Id, Total_Traffic__c, Store__c, Date__c FROM Store_Date__c WHERE Store__c = :thisStore.Id AND Date__c = :today];
+        } catch(Exception ex){
+            storeDateToday = new Store_Date__c(Store__c=thisStore.Id,Date__c=today,Total_Traffic__c=0);
+            insert storeDateToday;
+        }
+
+        
+        System.debug(storeDateToday);
+
+        Integer changeVal = 0;
         
         if (changeDir == 'Increment') {
             thisStore.Current_Traffic__c++;
+            changeVal = 1;
+            storeDateToday.Total_Traffic__c++;
         }
 
         if (changeDir == 'Decrement') {
             thisStore.Current_Traffic__c--;
+            changeVal = -1;
         }
-
+    
         System.debug(thisStore);
+        System.debug(storeDateToday);
         update thisStore;
+        update storeDateToday;
+
+        //Traffic_Change_Event__e trafEvent = new Traffic_Change_Event__e(Store_Record_Id__c=storeId,Change_Value__c=changeVal);
+        //Database.SaveResult result = EventBus.publish(trafEvent);
+        //System.debug(trafEvent);
+
+        //if (result.isSuccess()) {
+        //    System.debug('Successfully published event.');
+        //} else {
+        //    for(Database.Error err : result.getErrors()) {
+        //        System.debug('Error returned: ' +
+        //                    err.getStatusCode() +
+        //                    ' - ' +
+        //                    err.getMessage());
+        //    }
+        //}       
 
         return thisStore;
     }
