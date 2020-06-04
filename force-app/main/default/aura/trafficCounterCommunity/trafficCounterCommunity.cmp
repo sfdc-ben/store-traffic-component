@@ -9,6 +9,10 @@
     <aura:attribute name="channel" type="String" default="/event/Traffic_Change_Event__e"/>
     <aura:attribute name="subscription" type="Map" /> -->
 
+    <aura:attribute name="delay" type="Integer" default="5000" />
+    <aura:attribute name="errorTitle" type="String" default="No Entry!" />
+    <aura:attribute name="errorBody" type="String" default="The Store is at capacity, do not allow entry." />
+
     <aura:attribute name="maxTraffic" type="Integer" default="0" />
     <aura:attribute name="currentTraffic" type="Integer" default="0" />
     <aura:attribute name="capacity" type="Integer" default="0" />
@@ -59,7 +63,7 @@
             <div>
                 <aura:if isTrue="{!v.capacity == 100}">
                     <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
-                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large" variant="inverse"></lightning:icon>
+                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_top" size="large"></lightning:icon>
                     </div>
                     <aura:set attribute="else">
                         <div onclick="{!c.increment}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_success slds-box slds-align_absolute-center">
@@ -69,7 +73,7 @@
                 </aura:if>
                 <aura:if isTrue="{!v.capacity == 0}">
                     <div class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_shade slds-box slds-align_absolute-center">
-                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" variant="inverse"></lightning:icon>
+                        <lightning:icon class="slds-p-around_x-large" iconName="utility:jump_to_bottom" size="large" ></lightning:icon>
                     </div>
                     <aura:set attribute="else">
                         <div onclick="{!c.decrement}" class="slds-m-top_x-small slds-m-bottom_x-small slds-theme_warning slds-box slds-align_absolute-center">

@@ -68,4 +68,8 @@
         <name>Store Management</name>
         <type>Network</type>
     </appMenuItems>
+    <appMenuItems>
+        <name>Store_Management</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
 </AppMenu>

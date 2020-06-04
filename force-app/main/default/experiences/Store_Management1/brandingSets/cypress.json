@@ -1,0 +1,28 @@
+{
+  "definitionName" : "cypress:branding-cypress",
+  "id" : "c18ce087-c261-443d-9b2a-91219f94636c",
+  "label" : "Cypress",
+  "type" : "brandingSet",
+  "values" : {
+    "ActionColor" : "rgb(2, 71, 191)",
+    "BorderColor" : "rgb(212, 212, 212)",
+    "CardBackgroundColor" : "rgba(255, 255, 255, 0)",
+    "CompanyLogo" : "/file-asset/X1200pxBest_Buy_logo_2018svg?v=1&amp;height=300&amp;width=300",
+    "DetailTextColor" : "rgba(0, 0, 0, 0.6)",
+    "ErrorFontColor" : "rgba(2, 71, 191, 0.6)",
+    "HeaderFonts" : "Montserrat",
+    "LinkColor" : "rgb(2, 71, 191)",
+    "LoginBackgroundColor" : "#F4F4F4",
+    "LoginBackgroundImage" : "../../../../sfsites/picasso/core/external/salesforceIdentity/images/background.jpg?v=1",
+    "OverlayTextColor" : "rgb(255, 255, 255)",
+    "PageBackgroundColor" : "rgb(255, 255, 255)",
+    "PrimaryFont" : "Lato",
+    "TextColor" : "rgba(0, 0, 0, 0.8)",
+    "TextTransformStyle" : "none",
+    "_ActionColorDarker" : "#01348d",
+    "_ActionColorTrans" : "rgba(2, 71, 191, 0.9)",
+    "_HoverColor" : "rgba(2, 71, 191, 0.05)",
+    "_LinkColorDarker" : "#023897",
+    "_OverlayTextColorShadow" : "#000000"
+  }
+}

@@ -1,12 +1,9 @@
- public with sharing class StoreTrafficController {
+public with sharing class StoreTrafficController {
     
     private final static Integer MAX_RESULTS = 5;
 
     @AuraEnabled(cacheable=true)
     public static List<LookupSearchResult> search(String searchTerm, List<String> selectedIds, String anOptionalParam) {
-        // We're not using anOptionalParam parameter
-        // it's just here to demonstrate custom params
-        
         // Prepare query paramters
         searchTerm += '*';
 
@@ -31,6 +28,10 @@
     public static LookupSearchResult initSelection(String UserId){
 
         String storeIcon = 'custom:custom50';
+        
+        if (UserId == '') {
+                throw new AuraHandledException('No User Provided');
+        }
         
         Id accId = [SELECT contactId, contact.AccountId FROM User WHERE Id = :UserId].contact.AccountId;
         Store__c store = [SELECT Id, Name, Maximum_Traffic__c, Store_Number__c FROM Store__c WHERE Store_Account__c = :accId];
@@ -72,6 +73,9 @@
         Integer changeVal = 0;
         
         if (changeDir == 'Increment') {
+            if (thisStore.Current_Traffic__c >= thisStore.Maximum_Traffic__c) {
+                throw new AuraHandledException('Cannot increase traffic');
+            }
             thisStore.Current_Traffic__c++;
             changeVal = 1;
             storeDateToday.Total_Traffic__c++;

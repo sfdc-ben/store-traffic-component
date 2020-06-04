@@ -26,6 +26,8 @@
     },
 
     changeTraffic : function(component, dir) {
+        const errTitle = component.get("v.errorTitle");
+        const errBody = component.get("v.errorBody");
         const selection = component.get("v.selection");
         var action = component.get("c.changeTraffic");
         action.setParams({
@@ -33,12 +35,35 @@
             changeDir: dir
         });
         action.setCallback(this, function(response) {
-            var store = response.getReturnValue();
+            var state = response.getState();
+            if (state === "SUCCESS") {
+                var store = response.getReturnValue();
+            } else if (state === "INCOMPLETE") {
+                // do something
+            } else if (state === "ERROR") {
+                var errors = response.getError();
+                if (errors) {
+                    if (errors[0] && errors[0].message) {
+                        var toastEvent = $A.get("e.force:showToast");
+                        toastEvent.setParams({
+                            "title": errTitle,
+                            "message": errBody,
+                            "type": "error"
+                        });
+                        toastEvent.fire();
+                        console.log("Error message: " + 
+                                 errors[0].message);
+                    }
+                } else {
+                    console.log("Unknown error");
+                }
+            }
         })
         $A.enqueueAction(action);
     },
 
     initiatePolling : function(component, event, helper) {
+        var delay = component.get("v.delay");
         var myFunction = function() {
             const selection = component.get('v.selection');;
             var action = component.get("c.storeDetail");
@@ -56,7 +81,7 @@
                 } else {
                     console.log("Error");
                 }
-                setTimeout($A.getCallback(myFunction), 5000);
+                setTimeout($A.getCallback(myFunction), delay);
             });
             $A.enqueueAction(action);
         }

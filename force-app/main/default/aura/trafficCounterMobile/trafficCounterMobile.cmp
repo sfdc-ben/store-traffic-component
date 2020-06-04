@@ -8,6 +8,10 @@
     <aura:attribute name="channel" type="String" default="/event/Traffic_Change_Event__e"/>
     <aura:attribute name="subscription" type="Map" /> -->
 
+    <aura:attribute name="delay" type="Integer" default="5000" />
+    <aura:attribute name="errorTitle" type="String" default="No Entry!" />
+    <aura:attribute name="errorBody" type="String" default="The Store is at capacity, do not allow entry." />
+
     <aura:attribute name="maxTraffic" type="Integer" default="0" />
     <aura:attribute name="currentTraffic" type="Integer" default="0" />
     <aura:attribute name="capacity" type="Integer" default="0" />

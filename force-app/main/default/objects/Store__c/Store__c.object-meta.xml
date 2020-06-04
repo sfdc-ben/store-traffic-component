@@ -166,6 +166,7 @@
     <searchLayouts>
         <searchResultsAdditionalFields>Current_Traffic__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Maximum_Traffic__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Total_Traffic__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
     <visibility>Public</visibility>

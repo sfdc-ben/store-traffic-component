@@ -1,3 +1,6 @@
 <design:component label="Store Traffic Counter - Community">
     <design:attribute name="communityURL" label="Community URL Suffix" />
+    <design:attribute name="delay" label="Polling Delay (milliseconds)" default="5000"/>
+    <design:attribute name="errorTitle" label="Capacity Error Title" default="No Entry!"/>
+    <design:attribute name="errorBody" label="Capacity Error Body Text" default="The Store is at capacity, do not allow entry." />
 </design:component>
